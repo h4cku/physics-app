@@ -1,0 +1,45 @@
+<mat-drawer-container class="flex h-screen" autosize>
+  <mat-drawer #drawer class="main-sidenav" mode="side">
+    <div class="flex">
+      <p>Roadmap</p>
+      <div class="flex w-full justify-end">
+        <button (click)="drawer.toggle()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let topic of roadmap">
+        <mat-expansion-panel-header>{{
+          topic.name
+        }}</mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item *ngFor="let subTopic of topic.list">
+            <button (click)="openLink(subTopic.path)">
+              {{ subTopic.name }}
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-drawer>
+
+  <div>
+    <div class="main-sidenav-content">
+      <mat-toolbar color="primary">
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with menu icon"
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Physics</span>
+      </mat-toolbar>
+    </div>
+    <div class="flex h-[80vh]">
+      <router-outlet />
+    </div>
+  </div>
+</mat-drawer-container>
